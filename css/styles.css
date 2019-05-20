@@ -1,0 +1,97 @@
+body{
+	width: 100%;
+	margin:0;
+}
+/*div{
+	position: absolute;
+}*/
+.ad{
+  height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+  height: calc(var(--vh, 1vh) * 100);
+	width:100%;
+}
+.logo, .logo2{
+	position: fixed;
+	width: 10%;
+
+}
+
+.press{
+	position: absolute;
+	width: 20vw;
+	display: block;
+	margin-left:calc((75vw)/2);
+	bottom:250px;
+}
+
+.smoke{
+	display: block;
+	width: 30vw;
+	margin-left: calc(65vw/2);
+}
+.bottle1{
+	display: block;
+	margin: auto;
+	position: absolute;
+	width: 15vw;
+	bottom:0;
+	margin-left: calc((85vw)/2);
+}
+
+@media screen and (max-width: 1280px){
+
+
+
+	.bottle1{
+		width:15vw;
+		margin-left: calc((85vw)/2);
+	}
+
+
+	.press{
+		bottom: 20vw;
+	}
+
+}
+
+@media screen and (max-width: 1080px ){
+		.bottle1{
+		width:45vw;
+		margin-left: calc((55vw)/2);
+	}
+
+		.press{
+		width:70vw;
+		margin-left: calc(20vw/2);
+		bottom:45vh;
+	}
+
+		.logo{
+		width:26%;
+	}
+}
+
+@media screen and (max-width: 600px){
+
+	.press{
+		width:70vw;
+		margin-left: calc(20vw/2);
+		bottom:45vh;
+	}
+	.logo{
+		width:25%;
+	}
+	.bottle1{
+		width:60vw;
+		margin-left: calc((40vw)/2);
+	}
+}
+
+@media only screen 
+    and (device-width : 375px) 
+    and (device-height : 812px) 
+    and (-webkit-device-pixel-ratio : 3) {
+    	.press{
+    		bottom: 39vh;
+    	}
+    }
