@@ -9,6 +9,8 @@
     $(document).ready(function(){
         var isDown = false;
         var isUp = false;
+        var rustFadeOut = false;
+        var rustFadeOutTime = 3000;
         var bottle_with_cap = document.querySelector('#bottle-with-cap');
         bottle_with_cap.addEventListener("mousedown", handleMouseDown);
         window.addEventListener("mouseup", handleMouseUp);
@@ -16,20 +18,42 @@
         {
             console.log('mouseDown');
             $(".bottle-with-cap").fadeOut(0);
-            $(".bottle-without-cap").delay(1000).fadeOut(1000);
-            $(".rust").fadeOut(4000);
+            $(".bottle-without-cap").delay(1000).fadeOut(5000,function(){ bottleFadeOut = true;});
+            // $(".rust").fadeOut(4000,function(){rustFadeOut=true;});
+            $(".rust").animate({opacity:0},{duration: rustFadeOutTime, fail:function(a,b){
+                        
+                        //If FadeOut Time is too low Fade Out Anyway the Rust Wall
+                        if(rustFadeOutTime>0 && rustFadeOutTime>500){
+                            let now = Date.now();
+                            rustFadeOutTime = rustFadeOutTime - (now - a.startTime);
+                        }
+                        else{
+                            rustFadeOutTime = 0
+                            rustFadeOut = true;
+                            };
+                        console.log(rustFadeOutTime);
+                    },done:function(){rustFadeOut=true}},);
             $(".without-rust").show();
             $(".without-rust").delay(3000).fadeOut(4000);
             $(".chalees-behind-cta").show();
         }
         function handleMouseUp()
         {
-            $(".bottle-with-cap").fadeIn(0);
-            $(".bottle-without-cap").stop().fadeIn(0);
-            $(".rust").stop().fadeIn(0);
-            $(".without-rust").hide();
-            $(".without-rust").stop().fadeIn(0);
-            $(".chalees-behind-cta").hide();
+            console.log(rustFadeOut);
+            if(rustFadeOut){
+                  $(".bottle-without-cap").stop().hide();
+                  $(".bottle-with-cap").hide();
+                  $(".without-rust").fadeOut();
+                  $(".chalees-behind-cta").show();
+            }
+            else{
+                $(".bottle-with-cap").fadeIn(0);
+                $(".bottle-without-cap").stop().fadeIn();
+                $(".rust").stop();
+                $(".without-rust").hide();
+                $(".without-rust").stop();
+                $(".chalees-behind-cta").hide();
+            }
         }
     })
         
@@ -46,10 +70,7 @@
         //      $(".bottle-without-cap").mouseup(function () {
         //         console.log('mouseUp');
         //         $(".bottle-with-cap").fadeIn(0);
-        //         $(".bottle-without-cap").stop();
-        //         $(".rust").stop();
-        //         $(".without-rust").hide();
-        //         $(".without-rust").stop();
+        //        
         //         $(".chalees-behind-cta").hide();
         //     });
         // });
