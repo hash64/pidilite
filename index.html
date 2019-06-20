@@ -12,8 +12,8 @@
         var rustFadeOut = false;
         var rustFadeOutTime = 3000;
         var bottle_with_cap = document.querySelector('#bottle-with-cap');
-        bottle_with_cap.addEventListener("mousedown", handleMouseDown);
-        window.addEventListener("mouseup", handleMouseUp);
+        bottle_with_cap.addEventListener("touchstart", handleMouseDown);
+        window.addEventListener("touchend", handleMouseUp);
         function handleMouseDown()
         {
             console.log('mouseDown');
