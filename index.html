@@ -27,6 +27,7 @@
                         if(rustFadeOutTime>0 && rustFadeOutTime>500){
                             let now = Date.now();
                             rustFadeOutTime = rustFadeOutTime - (now - a.startTime);
+                            setWithoutRustOpacity(a.elem.style.opacity);
                         }
                         else{
                             rustFadeOutTime = 0
@@ -34,15 +35,34 @@
                             };
                         console.log(rustFadeOutTime);
                     },done:function(){rustFadeOut=true}},);
-            $(".without-rust").show();
-            $(".without-rust").delay(3000).fadeOut(4000,'linear',setZIndexOfBuyButton);
-            $(".chalees-behind-cta").show();
+          //  $(".without-rust").show();
             
+        }
+        function setWithoutRustOpacity(opacity)
+        {
+            let newOpacity = 1 - opacity;
+            console.log({'Opacity':opacity,'New Opacity':newOpacity})
+            $('.without-rust').animate({opacity:newOpacity},{complete:function(){
+                console.log("without Rust Animation Complete")
+                $(".without-rust").fadeOut(2000, 'linear', setZIndexOfBuyButton);
+            },always:function(a,b){
+                if(a.elem.style.opacity == 1)
+                {
+                    console.log({ "Always Function":1,'Opacity': opacity, 'New Opacity': newOpacity })
+                    $(".without-rust").fadeOut(2000, 'linear', setZIndexOfBuyButton);
+                }
+            }})
         }
         function setZIndexOfBuyButton()
         {
+            $(".chalees-behind-cta").show();
             $(".buy-now").fadeIn();
             $(".buy-now").css('z-index', '1');
+        }
+        function completeFadeOutWithoutRust()
+        {
+            
+             $(".without-rust").fadeOut(2000, 'linear', setZIndexOfBuyButton);
         }
         function handleMouseUp()
         {
@@ -50,8 +70,7 @@
             if(rustFadeOut){
                   $(".bottle-without-cap").stop().hide();
                   $(".bottle-with-cap").hide();
-                  $(".without-rust").fadeOut();
-                  $(".chalees-behind-cta").show();
+                 completeFadeOutWithoutRust()
                   //$(".buy-now").fadeIn("slow", "linear", setZIndexOfBuyButton);
             }   
             else{
