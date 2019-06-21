@@ -21,7 +21,7 @@
             $(".bottle-with-cap").fadeOut(0);
             $(".bottle-without-cap").delay(1000).fadeOut(5000,function(){ bottleFadeOut = true;});
             // $(".rust").fadeOut(4000,function(){rustFadeOut=true;});
-            $(".rust").animate({opacity:0},{duration: rustFadeOutTime, fail:function(a,b){
+            $(".rust").animate({opacity:0},{duration: rustFadeOutTime, always:function(a,b){
                         
                         //If FadeOut Time is too low Fade Out Anyway the Rust Wall
                         if(rustFadeOutTime>0 && rustFadeOutTime>500){
@@ -35,10 +35,14 @@
                         console.log(rustFadeOutTime);
                     },done:function(){rustFadeOut=true}},);
             $(".without-rust").show();
-            $(".without-rust").delay(3000).fadeOut(4000);
+            $(".without-rust").delay(3000).fadeOut(4000,'linear',setZIndexOfBuyButton);
             $(".chalees-behind-cta").show();
+            
+        }
+        function setZIndexOfBuyButton()
+        {
             $(".buy-now").fadeIn();
-            $(".rust").fadeOut();
+            $(".buy-now").css('z-index', '1');
         }
         function handleMouseUp()
         {
@@ -48,14 +52,15 @@
                   $(".bottle-with-cap").hide();
                   $(".without-rust").fadeOut();
                   $(".chalees-behind-cta").show();
+                  //$(".buy-now").fadeIn("slow", "linear", setZIndexOfBuyButton);
             }
             else{
                 $(".bottle-with-cap").fadeIn(0);
-                $(".bottle-without-cap").stop().fadeIn();
+                $(".bottle-without-cap").stop(true,true).fadeIn();
                 $(".rust").stop();
-                $(".without-rust").hide();
                 $(".without-rust").stop();
                 $(".chalees-behind-cta").hide();
+                $(".buy-now").hide();
             }
         }
     })
