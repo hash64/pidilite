@@ -14,8 +14,9 @@
         var bottle_with_cap = document.querySelector('#bottle-with-cap');
         bottle_with_cap.addEventListener("touchstart", handleMouseDown);
         window.addEventListener("touchend", handleMouseUp);
-        function handleMouseDown()
+        function handleMouseDown(e)
         {
+            e.preventDefault();
             console.log('mouseDown');
             $(".bottle-with-cap").fadeOut(0);
             $(".bottle-without-cap").delay(1000).fadeOut(5000,function(){ bottleFadeOut = true;});
